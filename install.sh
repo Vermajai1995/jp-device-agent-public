@@ -10,11 +10,11 @@ echo ""
 
 mkdir -p "$INSTALL_DIR"
 
-curl -L "https://github.com/Vermajai1995/jp-device-agent-public/releases/latest/download/jp-device-agent.zip" 
--o "$INSTALL_DIR/jp-device-agent.zip"
+DOWNLOAD_URL="https://github.com/Vermajai1995/jp-device-agent-public/releases/latest/download/jp-device-agent.zip"
 
-unzip -o "$INSTALL_DIR/jp-device-agent.zip" 
--d "$INSTALL_DIR"
+curl -L "$DOWNLOAD_URL" -o "$INSTALL_DIR/jp-device-agent.zip"
+
+unzip -o "$INSTALL_DIR/jp-device-agent.zip" -d "$INSTALL_DIR"
 
 echo ""
 echo "Installed at:"
