@@ -8,33 +8,38 @@ New-Item -ItemType Directory -Force -Path $InstallDir | Out-Null
 
 $ZipFile = "$InstallDir\jp-device-agent.zip"
 
-Invoke-WebRequest `  -Uri "https://github.com/Vermajai1995/jp-device-agent-public/releases/latest/download/jp-device-agent.zip"`
--OutFile $ZipFile
+Write-Host "Downloading latest release..."
 
-Expand-Archive `  -Path $ZipFile`
--DestinationPath $InstallDir `
--Force
+Invoke-WebRequest `
+  -Uri "https://github.com/Vermajai1995/jp-device-agent-public/releases/latest/download/jp-device-agent.zip" `
+  -OutFile $ZipFile
+
+Write-Host "Extracting files..."
+
+Expand-Archive `
+  -Path $ZipFile `
+  -DestinationPath $InstallDir `
+  -Force
 
 Remove-Item $ZipFile -Force
 
 Set-Location $InstallDir
 
 Write-Host "Installing dependencies..."
+
 npm install
 
-$TaskName = "JP Device Agent"
+Write-Host "Starting agent..."
 
-schtasks /Delete /TN "$TaskName" /F 2>$null
-
-schtasks /Create ` /SC ONLOGON`
-/RL HIGHEST ` /TN "$TaskName"`
-/TR "cmd /c cd /d $InstallDir && npm start" `
-/F
-
-schtasks /Run /TN "$TaskName"
+Start-Process powershell `
+  -WindowStyle Hidden `
+  -ArgumentList "cd '$InstallDir'; npm start"
 
 Write-Host ""
-Write-Host "JP Device Agent installed."
-Write-Host "Scheduled task created."
-Write-Host "Agent started."
+Write-Host "Installed at:"
+Write-Host $InstallDir
+Write-Host ""
+Write-Host "Agent started in background."
+Write-Host ""
+Write-Host "Installation complete."
 Write-Host ""
