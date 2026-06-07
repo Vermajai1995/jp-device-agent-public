@@ -26,7 +26,6 @@ echo "Installing dependencies..."
 npm install
 
 echo "Starting agent in background..."
-
 nohup npm start > "$INSTALL_DIR/agent.log" 2>&1 &
 
 sleep 5
