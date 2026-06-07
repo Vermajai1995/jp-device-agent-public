@@ -25,57 +25,19 @@ cd "$INSTALL_DIR"
 echo "Installing dependencies..."
 npm install
 
-PLIST="$HOME/Library/LaunchAgents/com.jai.deviceagent.plist"
+echo "Starting agent in background..."
 
-cat > "$PLIST" <<EOF
+nohup npm start > "$INSTALL_DIR/agent.log" 2>&1 &
 
-<?xml version="1.0" encoding="UTF-8"?>
-
-<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN"
-"http://www.apple.com/DTDs/PropertyList-1.0.dtd">
-
-<plist version="1.0">
-<dict>
-
-```
-<key>Label</key>
-<string>com.jai.deviceagent</string>
-
-<key>ProgramArguments</key>
-<array>
-    <string>/usr/bin/env</string>
-    <string>npm</string>
-    <string>start</string>
-</array>
-
-<key>WorkingDirectory</key>
-<string>$INSTALL_DIR</string>
-
-<key>RunAtLoad</key>
-<true/>
-
-<key>KeepAlive</key>
-<true/>
-
-<key>StandardOutPath</key>
-<string>$INSTALL_DIR/agent.log</string>
-
-<key>StandardErrorPath</key>
-<string>$INSTALL_DIR/agent-error.log</string>
-```
-
-</dict>
-</plist>
-EOF
-
-launchctl unload "$PLIST" >/dev/null 2>&1 || true
-launchctl load "$PLIST"
+sleep 5
 
 echo ""
-echo "JP Device Agent installed."
+echo "Installed at:"
+echo "$INSTALL_DIR"
 echo ""
-echo "Service started."
+echo "Agent started in background."
 echo ""
-echo "Logs:"
+echo "View logs:"
 echo "tail -f $INSTALL_DIR/agent.log"
 echo ""
+echo "Installation complete."
