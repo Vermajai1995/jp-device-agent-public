@@ -6,12 +6,10 @@ Write-Host ""
 
 New-Item -ItemType Directory -Force -Path $InstallDir | Out-Null
 
-Invoke-WebRequest `
--Uri "https://github.com/Vermajai1995/jp-device-agent/releases/latest/download/jp-device-agent.zip" `
+Invoke-WebRequest `-Uri "https://github.com/Vermajai1995/jp-device-agent-public/releases/latest/download/jp-device-agent.zip"`
 -OutFile "$InstallDir\jp-device-agent.zip"
 
-Expand-Archive `
--Path "$InstallDir\jp-device-agent.zip" `
+Expand-Archive `-Path "$InstallDir\jp-device-agent.zip"`
 -DestinationPath $InstallDir `
 -Force
 
