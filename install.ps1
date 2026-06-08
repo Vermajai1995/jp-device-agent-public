@@ -25,6 +25,11 @@ Remove-Item $ZipFile -Force
 
 Set-Location $InstallDir
 
+@"
+DEVICE_ID=$env:DEVICE_ID
+DEVICE_NAME=$env:DEVICE_NAME
+"@ | Set-Content "$InstallDir\.env.local"
+
 Write-Host "Installing dependencies..."
 
 npm install
