@@ -10,10 +10,13 @@ echo ""
 
 mkdir -p "$INSTALL_DIR"
 
-# Write environment configuration
+DEVICE_ID="${DEVICE_ID:-other}"
+DEVICE_NAME="${DEVICE_NAME:-other}"
+CORE_BACKEND_URL="${CORE_BACKEND_URL:-https://core-backend-navy.vercel.app}"
+
 cat > "$INSTALL_DIR/.env.local" << EOF
 DEVICE_ID=${DEVICE_ID}
-DEVICE_NAME=${DEVICE_NAME:-$(hostname)}
+DEVICE_NAME=${DEVICE_NAME}
 CORE_BACKEND_URL=${CORE_BACKEND_URL}
 EOF
 
@@ -47,4 +50,3 @@ echo "View logs:"
 echo "tail -f $INSTALL_DIR/agent.log"
 echo ""
 echo "Installation complete."
-</write_to_file>
