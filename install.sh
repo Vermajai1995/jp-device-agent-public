@@ -9,8 +9,13 @@ echo "Installing JP Device Agent..."
 echo ""
 
 mkdir -p "$INSTALL_DIR"
-echo "DEVICE_ID=${DEVICE_ID}" > .env.local
-echo "DEVICE_NAME=${DEVICE_NAME}" >> .env.local
+
+# Write environment configuration
+cat > "$INSTALL_DIR/.env.local" << EOF
+DEVICE_ID=${DEVICE_ID}
+DEVICE_NAME=${DEVICE_NAME:-$(hostname)}
+CORE_BACKEND_URL=${CORE_BACKEND_URL}
+EOF
 
 DOWNLOAD_URL="https://github.com/Vermajai1995/jp-device-agent-public/releases/latest/download/jp-device-agent.zip"
 
@@ -42,3 +47,4 @@ echo "View logs:"
 echo "tail -f $INSTALL_DIR/agent.log"
 echo ""
 echo "Installation complete."
+</write_to_file>

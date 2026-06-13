@@ -28,6 +28,7 @@ Set-Location $InstallDir
 @"
 DEVICE_ID=$env:DEVICE_ID
 DEVICE_NAME=$env:DEVICE_NAME
+CORE_BACKEND_URL=$env:CORE_BACKEND_URL
 "@ | Set-Content "$InstallDir\.env.local"
 
 Write-Host "Installing dependencies..."
@@ -48,3 +49,4 @@ Write-Host "Agent started in background."
 Write-Host ""
 Write-Host "Installation complete."
 Write-Host ""
+</write_to_file>
