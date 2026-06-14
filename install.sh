@@ -33,7 +33,7 @@ rm -f "$INSTALL_DIR/jp-device-agent.zip"
 cd "$INSTALL_DIR"
 
 echo "Installing dependencies..."
-npm install
+npm install --omit=dev
 
 echo "Starting agent in background..."
 nohup npm start > "$INSTALL_DIR/agent.log" 2>&1 &

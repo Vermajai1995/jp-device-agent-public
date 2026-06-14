@@ -56,13 +56,13 @@ CORE_BACKEND_URL=$env:CORE_BACKEND_URL
 
 Write-Host "Installing dependencies..."
 
-npm install
+npm install --omit=dev
 
 Write-Host "Starting agent..."
 
 Start-Process powershell `
     -WindowStyle Hidden `
-    -ArgumentList "-NoExit -Command `"cd '$InstallDir'; npm start`""
+    -ArgumentList "-Command `"cd '$InstallDir'; npm start`""
 
 Write-Host ""
 Write-Host "Installed at:"
